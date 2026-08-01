@@ -1,8 +1,8 @@
-import init_django_orm
+import init_django_orm  # noqa: F401
 
 from django.db.models import QuerySet
 
-from db.models import Genre, Actor
+from db.models import Actor, Genre
 
 
 def main() -> QuerySet:
@@ -21,17 +21,24 @@ def main() -> QuerySet:
     genre.name = "Drama"
     genre.save()
 
-    actor = Actor.objects.get(first_name="George", last_name="Klooney")
+    actor = Actor.objects.get(
+        first_name="George",
+        last_name="Klooney",
+    )
     actor.last_name = "Clooney"
     actor.save()
 
-    actor = Actor.objects.get(first_name="Kianu", last_name="Reaves")
+    actor = Actor.objects.get(
+        first_name="Kianu",
+        last_name="Reaves",
+    )
     actor.first_name = "Keanu"
     actor.last_name = "Reeves"
     actor.save()
 
     Genre.objects.get(name="Action").delete()
-
     Actor.objects.filter(first_name="Scarlett").delete()
 
-    return Actor.objects.filter(last_name="Smith").order_by("first_name")
+    return Actor.objects.filter(
+        last_name="Smith",
+    ).order_by("first_name")
